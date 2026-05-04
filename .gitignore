@@ -1,0 +1,11 @@
+# Editor / OS
+.DS_Store
+Thumbs.db
+*.swp
+
+# Claude Code config (local tooling, not project code)
+.claude/
+
+# Temporary conversion artifacts
+IMG_*_small.*
+*.HEIC

@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Our Team | Golden Mile Chrysler Dodge Jeep Ram</title>
+
+<!-- Bootstrap 4.6 (Twitter Bootstrap) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<!-- Google fonts: Inter for body, Playfair for accents -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+<style>
+  /* =========================================================
+     Modern white theme — Golden Mile Chrysler
+     Brand colors pulled from the logo:
+       Navy   #1A2447  (MILE / CHRYSLER text, tree silhouette)
+       Orange #E87722  (GOLDEN text)
+       Grey   #9A9DA0  (maple leaf)
+     ========================================================= */
+  :root {
+    --bg:           #ffffff;
+    --bg-soft:      #f7f7f8;
+    --card-bg:      #ffffff;
+    --border:       #e7e7ea;
+    --border-hover: #c8ccd4;
+    --text:         #0d1117;
+    --text-muted:   #5a6271;
+    --text-soft:    #8b94a3;
+    --navy:         #1a2447;
+    --navy-deep:    #121a36;
+    --orange:       #e87722;
+  }
+
+  html, body { background: var(--bg); }
+  body.team-page {
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    letter-spacing: 0.005em;
+  }
+
+  a { color: inherit; }
+
+  /* ---------- Hero ---------- */
+  .team-hero {
+    text-align: center;
+    padding: 90px 20px 70px;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+  }
+  .team-hero .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.36em;
+    font-size: 0.74rem;
+    color: var(--orange);
+    font-weight: 600;
+    margin-bottom: 18px;
+  }
+  .team-hero h1 {
+    font-weight: 800;
+    font-size: 3.2rem;
+    line-height: 1.1;
+    margin: 0 0 18px;
+    color: var(--navy);
+    letter-spacing: -0.02em;
+  }
+  .team-hero p {
+    color: var(--text-muted);
+    font-size: 1.05rem;
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+  .team-hero .accent-line {
+    width: 56px;
+    height: 3px;
+    background: var(--orange);
+    margin: 28px auto 0;
+  }
+
+  /* ---------- Section heading ---------- */
+  .section-heading {
+    margin: 80px 0 36px;
+    text-align: left;
+  }
+  .section-heading .label {
+    display: inline-block;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.32em;
+    color: var(--orange);
+    font-weight: 700;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .section-heading h2 {
+    font-weight: 800;
+    font-size: 2rem;
+    color: var(--navy);
+    margin-top: 16px;
+    margin-bottom: 0;
+    letter-spacing: -0.01em;
+  }
+  .section-heading .desc {
+    color: var(--text-muted);
+    margin-top: 10px;
+    max-width: 640px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* ---------- Staff card ---------- */
+  .staff-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    height: calc(100% - 30px);
+    display: flex;
+    flex-direction: column;
+  }
+  .staff-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-hover);
+    box-shadow: 0 18px 40px rgba(26, 36, 71, 0.10);
+  }
+
+  .staff-photo-wrap {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-soft);
+  }
+  .staff-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .staff-card:hover .staff-photo {
+    transform: scale(1.02);
+  }
+
+  .staff-info {
+    padding: 22px 24px 22px;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    border-top: 3px solid var(--navy);
+  }
+  .staff-name {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 4px;
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+  .staff-role {
+    font-size: 0.76rem;
+    color: var(--orange);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin: 0 0 18px;
+  }
+
+  .staff-divider {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 0 0 14px;
+  }
+
+  .staff-contact {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 8px 0;
+    word-break: break-word;
+    display: flex;
+    align-items: center;
+  }
+  .staff-contact a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .staff-contact a:hover { color: var(--navy); text-decoration: underline; }
+  .staff-contact .icon {
+    color: var(--navy);
+    width: 16px;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  /* ---------- Responsive tweaks ---------- */
+  @media (max-width: 767px) {
+    .team-hero h1 { font-size: 2.1rem; }
+    .section-heading h2 { font-size: 1.55rem; }
+  }
+</style>
+</head>
+<body class="team-page">
+
+<!-- ============ HERO ============ -->
+<section class="team-hero">
+  <div class="container">
+    <div class="eyebrow">Our People</div>
+    <h1>Meet the Golden Mile Family</h1>
+    <p>From the front desk to the showroom floor, every member of our team is here to make your experience exceptional. Get to know the people behind Golden Mile Chrysler.</p>
+    <div class="accent-line"></div>
+  </div>
+</section>
+
+<div class="container">
+
+  <!-- ============ 01 — LEADERSHIP ============ -->
+  <div class="section-heading">
+    <div class="label">01 — Leadership</div>
+    <h2>Driving the Vision</h2>
+    <p class="desc">The leaders who set our standards and steer the dealership forward.</p>
+  </div>
+
+  <div class="row justify-content-center">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Navin Kotecha.png" alt="Navin Kotecha" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Navin Kotecha</h3>
+          <p class="staff-role">Owner / President</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2304</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:navin@goldenmilechrysler.ca">navin@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Vino Kotecha.png" alt="Vino Kotecha" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Vino Kotecha</h3>
+          <p class="staff-role">Dealer Operations</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2228</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:vino@goldenmilechrysler.ca">vino@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 02 — SALES MANAGEMENT ============ -->
+  <div class="section-heading">
+    <div class="label">02 — Sales Management</div>
+    <h2>Leading the Showroom</h2>
+    <p class="desc">The team leading our sales floor and helping you find the right vehicle.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Mitchell Cadesky.png" alt="Mitchell Cadesky" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Mitchell Cadesky</h3>
+          <p class="staff-role">Sales Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2268</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:mitchell@goldenmilechrysler.ca">mitchell@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Sunil George.png" alt="Sunil George" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Sunil George</h3>
+          <p class="staff-role">Corporate Sales Executive Director</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2229</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:sunil@goldenmilechrysler.ca">sunil@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Ron Lake.png" alt="Ron Lake" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Ron Lake</h3>
+          <p class="staff-role">Sales Portfolio Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2236</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:ron@goldenmilechrysler.ca">ron@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 03 — SALES TEAM ============ -->
+  <div class="section-heading">
+    <div class="label">03 — Sales Team</div>
+    <h2>Product Specialists &amp; Advisors</h2>
+    <p class="desc">Our specialists walk you through models, options, and the right Chrysler, Dodge, Jeep, or Ram for your needs.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Elias John.png" alt="Elias John" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Elias John</h3>
+          <p class="staff-role">Product Specialist</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2271</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:elias@goldenmilechrysler.ca">elias@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Remith.png" alt="Remith" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Remith</h3>
+          <p class="staff-role">Product Advisor</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2253</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:remith@goldenmilechrysler.ca">remith@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Sal Valla.png" alt="Sal Valla" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Sal Valla</h3>
+          <p class="staff-role">Product Advisor</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2257</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:sal@goldenmilechrysler.ca">sal@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 04 — FINANCE ============ -->
+  <div class="section-heading">
+    <div class="label">04 — Finance</div>
+    <h2>Financing Your Future</h2>
+    <p class="desc">Finance leadership and managers — making the numbers work for you.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Harmider Hara.png" alt="Harminder Hara" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Harminder Hara</h3>
+          <p class="staff-role">Financial Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 3425</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:harminder@goldenmilechrysler.ca">harminder@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Philip Roshan.png" alt="Philip Roshan" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Philip Roshan</h3>
+          <p class="staff-role">Director of Finance &amp; Sales Operation</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2275</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:philip@goldenmilechrysler.ca">philip@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Mehdi Lavasani.png" alt="Mehdi Lavasani" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Mehdi Lavasani</h3>
+          <p class="staff-role">Finance Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2329</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:mehdi@goldenmilechrysler.ca">mehdi@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 05 — SERVICE MANAGEMENT ============ -->
+  <div class="section-heading">
+    <div class="label">05 — Service Management</div>
+    <h2>Leading the Service Bay</h2>
+    <p class="desc">Service leadership — overseeing our shop and fleet operations.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Bianca Parmar.png" alt="Bianca Parmar" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Bianca Parmar</h3>
+          <p class="staff-role">Service Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2244</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:bianca@goldenmilechrysler.ca">bianca@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Anotony Vincent.png" alt="Antony Vincent" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Antony Vincent</h3>
+          <p class="staff-role">Fleet Service Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2295</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:antony@goldenmilechrysler.ca">antony@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 06 — SERVICE TEAM ============ -->
+  <div class="section-heading">
+    <div class="label">06 — Service Team</div>
+    <h2>Keeping You On the Road</h2>
+    <p class="desc">Service advisors and coordinators — keeping your vehicle running like new.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Sanshia Fernando.png" alt="Sanshia Fernando" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Sanshia Fernando</h3>
+          <p class="staff-role">Service Appointment Coordinator</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2243</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:sanshia@goldenmilechrysler.ca">sanshia@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Julia Abdool.png" alt="Julia Abdool" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Julia Abdool</h3>
+          <p class="staff-role">Internal Service Coordinator</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2238</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:julia@goldenmilechrysler.ca">julia@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Christina Gagliardi.png" alt="Christina Gagliardi" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Christina Gagliardi</h3>
+          <p class="staff-role">Service Advisor</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2245</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:christina@goldenmilechrysler.ca">christina@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Santiago Rocha.png" alt="Santiago Rocha" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Santiago Rocha</h3>
+          <p class="staff-role">Service Advisor</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2246</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:santiago@goldenmilechrysler.ca">santiago@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 07 — PARTS MANAGEMENT ============ -->
+  <div class="section-heading">
+    <div class="label">07 — Parts Management</div>
+    <h2>Leading the Parts Counter</h2>
+    <p class="desc">Parts leadership — overseeing inventory, sourcing, and the team behind the counter.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Paul Teppenden.png" alt="Paul Teppenden" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Paul Teppenden</h3>
+          <p class="staff-role">Parts Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2240</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:paul@goldenmilechrysler.ca">paul@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Bob Wills.png" alt="Bob Wills" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Bob Wills</h3>
+          <p class="staff-role">Parts Development Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:bob@goldenmilechrysler.ca">bob@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 08 — PARTS TEAM ============ -->
+  <div class="section-heading">
+    <div class="label">08 — Parts Team</div>
+    <h2>The Right Parts, Every Time</h2>
+    <p class="desc">Parts advisors — genuine OEM parts and trusted advice from our parts counter.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Kazem Khaleqi.png" alt="Kazem Khaleqi" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Kazem Khaleqi</h3>
+          <p class="staff-role">Parts Advisor</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2306</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:kazem@goldenmilechrysler.ca">kazem@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Ralph.png" alt="Ralph" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Ralph</h3>
+          <p class="staff-role">Parts Advisor</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2261</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:ralph@goldenmilechrysler.ca">ralph@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 09 — OPERATIONS & MARKETING ============ -->
+  <div class="section-heading">
+    <div class="label">09 — Operations &amp; Marketing</div>
+    <h2>Behind the Scenes</h2>
+    <p class="desc">Business development, marketing, and office administration — the team that keeps everything connected.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/David smith.png" alt="David Smith" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">David Smith</h3>
+          <p class="staff-role">Business Development Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2278</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:david@goldenmilechrysler.ca">david@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Johan George.png" alt="Johan George" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Johan George</h3>
+          <p class="staff-role">Social Media &amp; Marketing Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2316</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:johan@goldenmilechrysler.ca">johan@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Delwar Hossain.png" alt="Delwar Hossain" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Delwar Hossain</h3>
+          <p class="staff-role">Office Account Manager</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2279</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:delwar@goldenmilechrysler.ca">delwar@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 10 — GUEST SERVICES ============ -->
+  <div class="section-heading">
+    <div class="label">10 — Guest Services</div>
+    <h2>The Welcoming Faces</h2>
+    <p class="desc">Reception — the first faces you see and the voices on the phone.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Aiswarya Jayan.png" alt="Aiswarya Jayan" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Aiswarya Jayan</h3>
+          <p class="staff-role">Receptionist</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2232</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:aiswarya@goldenmilechrysler.ca">aiswarya@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Lumertha Kiritharan.png" alt="Lumertha Kiritharan" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Lumertha Kiritharan</h3>
+          <p class="staff-role">Receptionist</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2221</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:lumertha@goldenmilechrysler.ca">lumertha@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Maria Janagan.png" alt="Maria Janagan" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Maria Janagan</h3>
+          <p class="staff-role">Receptionist</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-phone icon"></i>Ext. 2524</p>
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:maria@goldenmilechrysler.ca">maria@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ============ 11 — LOT ATTENDANTS ============ -->
+  <div class="section-heading">
+    <div class="label">11 — Lot Attendants</div>
+    <h2>Keeping the Lot Moving</h2>
+    <p class="desc">Shuttle and lot — the team that keeps vehicles ready and customers on the move.</p>
+  </div>
+
+  <div class="row">
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Adhil Mohamed Mohammed Ismail.png" alt="Adhil Mohammed Mohammed Ismail" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Adhil Mohammed Mohammed Ismail</h3>
+          <p class="staff-role">Shuttle Driver / Lot Attendant</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:adhil@goldenmilechrysler.ca">adhil@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="staff-card">
+        <div class="staff-photo-wrap"><img src="team-photos/Pavel Birza.png" alt="Pavel Birza" class="staff-photo"></div>
+        <div class="staff-info">
+          <h3 class="staff-name">Pavel Birza</h3>
+          <p class="staff-role">Lot Attendant</p>
+          <hr class="staff-divider">
+          <p class="staff-contact"><i class="fas fa-envelope icon"></i><a href="mailto:pavel@goldenmilechrysler.ca">pavel@goldenmilechrysler.ca</a></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="height: 80px;"></div>
+
+</div><!-- /.container -->
+
+<!-- Bootstrap 4.6 JS bundle -->
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
