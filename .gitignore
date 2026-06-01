@@ -6,6 +6,13 @@ Thumbs.db
 # Claude Code config (local tooling, not project code)
 .claude/
 
+# Node / build tooling (image optimization deps)
+node_modules/
+
+# Host CLI state (not project code)
+.netlify/
+.wrangler/
+
 # Temporary conversion artifacts
 IMG_*_small.*
 *.HEIC
