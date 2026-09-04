@@ -1,120 +1,4 @@
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');
-
-/* Golden Mile — staff page in the eDealer /staff/ visual style.
-   Values measured from the live eDealer page's computed styles. */
-
-.gmc-staff{--gmc-red:#ca0000;--gmc-dark:#222;--gmc-card:#ebebeb;--gmc-gut:37.5px;
-  font-family:Arial,Helvetica,sans-serif;color:#000;-webkit-font-smoothing:antialiased}
-.gmc-staff *,.gmc-staff *::before,.gmc-staff *::after{box-sizing:border-box}
-.gmc-container{max-width:1440px;margin:0 auto;padding:0 83px}
-
-/* department tabs — pure CSS, no JavaScript (CMS editors strip <script>) */
-.gmc-radio{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
-/* WordPress's wpautop wraps each loose radio in its own <p>. The radio is taken
-   out of flow, but the <p> still generates a line box with default margins —
-   twelve of them stacked up as a large blank gap above the tabs. display:contents
-   removes the wrapper's box while leaving the input where it is. */
-.gmc-staff p:has(> .gmc-radio){display:contents}
-.gmc-staff > p:empty{display:none}
-/* and any <br> wpautop inserted between them — belt and braces, since the markup
-   now keeps the radios on one line so there should be none to begin with */
-.gmc-staff p:has(> .gmc-radio) br,.gmc-staff > br{display:none}
-.gmc-tabs{display:flex;flex-wrap:wrap;row-gap:14px;list-style:none;margin:0 0 28px;padding:28px 0 0;
-  border-bottom:1px solid #ddd}
-.gmc-tab{padding:0 25px 0 0}
-.gmc-tab-link{position:relative;display:inline-flex;padding-bottom:12px;font-size:17px;line-height:1.3;
-  color:#000;cursor:pointer;text-transform:uppercase;white-space:nowrap}
-.gmc-tab-link::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;
-  background:var(--gmc-red);opacity:0;transition:opacity .15s ease}
-.gmc-tab-link:hover::after{opacity:.45}
-.gmc-radio:focus-visible + .gmc-wrap .gmc-tab-link{outline:2px solid var(--gmc-red);outline-offset:3px}
-
-/* panels */
-.gmc-panel{display:none}
-
-/* grid — 1 / 2 / 3 up, matching eDealer's medium-6 xlarge-4 */
-.gmc-grid{display:flex;flex-wrap:wrap;margin:0 calc(var(--gmc-gut) / -2)}
-.gmc-cell{width:100%;padding:0 calc(var(--gmc-gut) / 2);margin-bottom:var(--gmc-gut)}
-@media (min-width:640px){.gmc-cell{width:50%}}
-@media (min-width:1200px){.gmc-cell{width:33.3333%}}
-
-/* card */
-.gmc-box{background:var(--gmc-card);padding:25px;height:100%}
-.gmc-img{line-height:0}
-.gmc-img img{width:100%;height:auto;display:block}
-.gmc-details{padding-top:18px}
-.gmc-name{font-family:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;font-size:25px;line-height:30px;
-  font-weight:400;letter-spacing:.2px;color:#000}
-.gmc-title{font-family:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;font-size:20px;line-height:25px;
-  font-weight:600;letter-spacing:.4px;color:#000;margin-top:2px}
-
-/* contact list */
-.gmc-contact{list-style:none;margin:14px 0 0;padding:0}
-.gmc-contact li{display:flex;align-items:center;gap:9px;font-size:13px;line-height:1.5;margin-top:7px}
-.gmc-contact a{color:#000;text-decoration:none;word-break:break-all}
-.gmc-contact a:hover{text-decoration:underline}
-.gmc-ico{flex:0 0 20px;width:20px;height:20px;color:var(--gmc-red)}
-.gmc-ico svg{width:100%;height:100%;display:block}
-
-/* active tab + visible panel */
-.gmc-staff:has(#gmc-d0:checked) .gmc-tab-link[for="gmc-d0"]::after{opacity:1}
-.gmc-staff:has(#gmc-d0:checked) .gmc-panel-0{display:block}
-#gmc-d0:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d0"]::after{opacity:1}
-#gmc-d0:checked ~ .gmc-wrap .gmc-panel-0{display:block}
-.gmc-staff:has(#gmc-d1:checked) .gmc-tab-link[for="gmc-d1"]::after{opacity:1}
-.gmc-staff:has(#gmc-d1:checked) .gmc-panel-1{display:block}
-#gmc-d1:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d1"]::after{opacity:1}
-#gmc-d1:checked ~ .gmc-wrap .gmc-panel-1{display:block}
-.gmc-staff:has(#gmc-d2:checked) .gmc-tab-link[for="gmc-d2"]::after{opacity:1}
-.gmc-staff:has(#gmc-d2:checked) .gmc-panel-2{display:block}
-#gmc-d2:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d2"]::after{opacity:1}
-#gmc-d2:checked ~ .gmc-wrap .gmc-panel-2{display:block}
-.gmc-staff:has(#gmc-d3:checked) .gmc-tab-link[for="gmc-d3"]::after{opacity:1}
-.gmc-staff:has(#gmc-d3:checked) .gmc-panel-3{display:block}
-#gmc-d3:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d3"]::after{opacity:1}
-#gmc-d3:checked ~ .gmc-wrap .gmc-panel-3{display:block}
-.gmc-staff:has(#gmc-d4:checked) .gmc-tab-link[for="gmc-d4"]::after{opacity:1}
-.gmc-staff:has(#gmc-d4:checked) .gmc-panel-4{display:block}
-#gmc-d4:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d4"]::after{opacity:1}
-#gmc-d4:checked ~ .gmc-wrap .gmc-panel-4{display:block}
-.gmc-staff:has(#gmc-d5:checked) .gmc-tab-link[for="gmc-d5"]::after{opacity:1}
-.gmc-staff:has(#gmc-d5:checked) .gmc-panel-5{display:block}
-#gmc-d5:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d5"]::after{opacity:1}
-#gmc-d5:checked ~ .gmc-wrap .gmc-panel-5{display:block}
-.gmc-staff:has(#gmc-d6:checked) .gmc-tab-link[for="gmc-d6"]::after{opacity:1}
-.gmc-staff:has(#gmc-d6:checked) .gmc-panel-6{display:block}
-#gmc-d6:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d6"]::after{opacity:1}
-#gmc-d6:checked ~ .gmc-wrap .gmc-panel-6{display:block}
-.gmc-staff:has(#gmc-d7:checked) .gmc-tab-link[for="gmc-d7"]::after{opacity:1}
-.gmc-staff:has(#gmc-d7:checked) .gmc-panel-7{display:block}
-#gmc-d7:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d7"]::after{opacity:1}
-#gmc-d7:checked ~ .gmc-wrap .gmc-panel-7{display:block}
-.gmc-staff:has(#gmc-d8:checked) .gmc-tab-link[for="gmc-d8"]::after{opacity:1}
-.gmc-staff:has(#gmc-d8:checked) .gmc-panel-8{display:block}
-#gmc-d8:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d8"]::after{opacity:1}
-#gmc-d8:checked ~ .gmc-wrap .gmc-panel-8{display:block}
-.gmc-staff:has(#gmc-d9:checked) .gmc-tab-link[for="gmc-d9"]::after{opacity:1}
-.gmc-staff:has(#gmc-d9:checked) .gmc-panel-9{display:block}
-#gmc-d9:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d9"]::after{opacity:1}
-#gmc-d9:checked ~ .gmc-wrap .gmc-panel-9{display:block}
-.gmc-staff:has(#gmc-d10:checked) .gmc-tab-link[for="gmc-d10"]::after{opacity:1}
-.gmc-staff:has(#gmc-d10:checked) .gmc-panel-10{display:block}
-#gmc-d10:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d10"]::after{opacity:1}
-#gmc-d10:checked ~ .gmc-wrap .gmc-panel-10{display:block}
-.gmc-staff:has(#gmc-d11:checked) .gmc-tab-link[for="gmc-d11"]::after{opacity:1}
-.gmc-staff:has(#gmc-d11:checked) .gmc-panel-11{display:block}
-#gmc-d11:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d11"]::after{opacity:1}
-#gmc-d11:checked ~ .gmc-wrap .gmc-panel-11{display:block}
-
-@media (max-width:900px){
-  .gmc-container{padding:0 24px}
-  .gmc-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
-  .gmc-tabs::-webkit-scrollbar{display:none}
-}
-
-</style>
-<div class="gmc-staff">
+<style>@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap'); .gmc-staff{--gmc-red:#ca0000;--gmc-dark:#222;--gmc-card:#ebebeb;--gmc-gut:37.5px; font-family:Arial,Helvetica,sans-serif;color:#000;-webkit-font-smoothing:antialiased} .gmc-staff *,.gmc-staff *::before,.gmc-staff *::after{box-sizing:border-box} .gmc-container{max-width:1440px;margin:0 auto;padding:0 83px} .gmc-radio{position:absolute;opacity:0;pointer-events:none;width:0;height:0} .gmc-staff p:has(> .gmc-radio){display:contents} .gmc-staff > p:empty{display:none} .gmc-staff p:has(> .gmc-radio) br,.gmc-staff > br{display:none} .gmc-tabs{display:flex;flex-wrap:wrap;row-gap:14px;list-style:none;margin:0 0 28px;padding:28px 0 0; border-bottom:1px solid #ddd} .gmc-tab{padding:0 25px 0 0} .gmc-tab-link{position:relative;display:inline-flex;padding-bottom:12px;font-size:17px;line-height:1.3; color:#000;cursor:pointer;text-transform:uppercase;white-space:nowrap} .gmc-tab-link::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px; background:var(--gmc-red);opacity:0;transition:opacity .15s ease} .gmc-tab-link:hover::after{opacity:.45} .gmc-radio:focus-visible + .gmc-wrap .gmc-tab-link{outline:2px solid var(--gmc-red);outline-offset:3px} .gmc-panel{display:none} .gmc-grid{display:flex;flex-wrap:wrap;margin:0 calc(var(--gmc-gut) / -2)} .gmc-cell{width:100%;padding:0 calc(var(--gmc-gut) / 2);margin-bottom:var(--gmc-gut)} @media (min-width:640px){.gmc-cell{width:50%}} @media (min-width:1200px){.gmc-cell{width:33.3333%}} .gmc-box{background:var(--gmc-card);padding:25px;height:100%} .gmc-img{line-height:0} .gmc-img img{width:100%;height:auto;display:block} .gmc-details{padding-top:18px} .gmc-name{font-family:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;font-size:25px;line-height:30px; font-weight:400;letter-spacing:.2px;color:#000} .gmc-title{font-family:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;font-size:20px;line-height:25px; font-weight:600;letter-spacing:.4px;color:#000;margin-top:2px} .gmc-contact{list-style:none;margin:14px 0 0;padding:0} .gmc-contact li{display:flex;align-items:center;gap:9px;font-size:13px;line-height:1.5;margin-top:7px} .gmc-contact a{color:#000;text-decoration:none;word-break:break-all} .gmc-contact a:hover{text-decoration:underline} .gmc-ico{flex:0 0 20px;width:20px;height:20px;background-repeat:no-repeat;background-position:center;background-size:20px 20px} .gmc-ico-phone{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='none' stroke='%23ca0000' stroke-width='1.4'/%3E%3Cpath d='M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z' fill='%23ca0000'/%3E%3C/svg%3E")} .gmc-ico-mail{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='none' stroke='%23ca0000' stroke-width='1.4'/%3E%3Cpath d='M6.5 9h11v6.2h-11z' fill='none' stroke='%23ca0000' stroke-width='1.4'/%3E%3Cpath d='m6.5 9.3 5.5 3.9 5.5-3.9' fill='none' stroke='%23ca0000' stroke-width='1.4'/%3E%3C/svg%3E")} .gmc-staff:has(#gmc-d0:checked) .gmc-tab-link[for="gmc-d0"]::after{opacity:1} .gmc-staff:has(#gmc-d0:checked) .gmc-panel-0{display:block} #gmc-d0:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d0"]::after{opacity:1} #gmc-d0:checked ~ .gmc-wrap .gmc-panel-0{display:block} .gmc-staff:has(#gmc-d1:checked) .gmc-tab-link[for="gmc-d1"]::after{opacity:1} .gmc-staff:has(#gmc-d1:checked) .gmc-panel-1{display:block} #gmc-d1:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d1"]::after{opacity:1} #gmc-d1:checked ~ .gmc-wrap .gmc-panel-1{display:block} .gmc-staff:has(#gmc-d2:checked) .gmc-tab-link[for="gmc-d2"]::after{opacity:1} .gmc-staff:has(#gmc-d2:checked) .gmc-panel-2{display:block} #gmc-d2:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d2"]::after{opacity:1} #gmc-d2:checked ~ .gmc-wrap .gmc-panel-2{display:block} .gmc-staff:has(#gmc-d3:checked) .gmc-tab-link[for="gmc-d3"]::after{opacity:1} .gmc-staff:has(#gmc-d3:checked) .gmc-panel-3{display:block} #gmc-d3:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d3"]::after{opacity:1} #gmc-d3:checked ~ .gmc-wrap .gmc-panel-3{display:block} .gmc-staff:has(#gmc-d4:checked) .gmc-tab-link[for="gmc-d4"]::after{opacity:1} .gmc-staff:has(#gmc-d4:checked) .gmc-panel-4{display:block} #gmc-d4:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d4"]::after{opacity:1} #gmc-d4:checked ~ .gmc-wrap .gmc-panel-4{display:block} .gmc-staff:has(#gmc-d5:checked) .gmc-tab-link[for="gmc-d5"]::after{opacity:1} .gmc-staff:has(#gmc-d5:checked) .gmc-panel-5{display:block} #gmc-d5:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d5"]::after{opacity:1} #gmc-d5:checked ~ .gmc-wrap .gmc-panel-5{display:block} .gmc-staff:has(#gmc-d6:checked) .gmc-tab-link[for="gmc-d6"]::after{opacity:1} .gmc-staff:has(#gmc-d6:checked) .gmc-panel-6{display:block} #gmc-d6:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d6"]::after{opacity:1} #gmc-d6:checked ~ .gmc-wrap .gmc-panel-6{display:block} .gmc-staff:has(#gmc-d7:checked) .gmc-tab-link[for="gmc-d7"]::after{opacity:1} .gmc-staff:has(#gmc-d7:checked) .gmc-panel-7{display:block} #gmc-d7:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d7"]::after{opacity:1} #gmc-d7:checked ~ .gmc-wrap .gmc-panel-7{display:block} .gmc-staff:has(#gmc-d8:checked) .gmc-tab-link[for="gmc-d8"]::after{opacity:1} .gmc-staff:has(#gmc-d8:checked) .gmc-panel-8{display:block} #gmc-d8:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d8"]::after{opacity:1} #gmc-d8:checked ~ .gmc-wrap .gmc-panel-8{display:block} .gmc-staff:has(#gmc-d9:checked) .gmc-tab-link[for="gmc-d9"]::after{opacity:1} .gmc-staff:has(#gmc-d9:checked) .gmc-panel-9{display:block} #gmc-d9:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d9"]::after{opacity:1} #gmc-d9:checked ~ .gmc-wrap .gmc-panel-9{display:block} .gmc-staff:has(#gmc-d10:checked) .gmc-tab-link[for="gmc-d10"]::after{opacity:1} .gmc-staff:has(#gmc-d10:checked) .gmc-panel-10{display:block} #gmc-d10:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d10"]::after{opacity:1} #gmc-d10:checked ~ .gmc-wrap .gmc-panel-10{display:block} .gmc-staff:has(#gmc-d11:checked) .gmc-tab-link[for="gmc-d11"]::after{opacity:1} .gmc-staff:has(#gmc-d11:checked) .gmc-panel-11{display:block} #gmc-d11:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d11"]::after{opacity:1} #gmc-d11:checked ~ .gmc-wrap .gmc-panel-11{display:block} @media (max-width:900px){ .gmc-container{padding:0 24px} .gmc-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none} .gmc-tabs::-webkit-scrollbar{display:none} }</style><div class="gmc-staff">
   <input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d0" checked><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d1"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d2"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d3"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d4"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d5"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d6"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d7"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d8"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d9"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d10"><input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d11">
   <div class="gmc-wrap">
     <div class="gmc-container">
@@ -141,8 +25,8 @@
                 <div class="gmc-name">Navin Kotecha</div>
                 <div class="gmc-title">Owner / President</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2304</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:navin@goldenmilechrysler.ca">navin@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2304</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:navin@goldenmilechrysler.ca">navin@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -154,8 +38,8 @@
                 <div class="gmc-name">Vino Kotecha</div>
                 <div class="gmc-title">Executive Chairman</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2228</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:vino@goldenmilechrysler.ca">vino@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2228</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:vino@goldenmilechrysler.ca">vino@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -171,8 +55,8 @@
                 <div class="gmc-name">Mitchell Cadesky</div>
                 <div class="gmc-title">General Sales Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2268</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:mitch@goldenmilechrysler.ca">mitch@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2268</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:mitch@goldenmilechrysler.ca">mitch@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -184,8 +68,8 @@
                 <div class="gmc-name">Sunil George</div>
                 <div class="gmc-title">Corporate Sales Executive Director</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2229</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:sunil@goldenmilechrysler.ca">sunil@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2229</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:sunil@goldenmilechrysler.ca">sunil@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -197,8 +81,8 @@
                 <div class="gmc-name">Ron Lake</div>
                 <div class="gmc-title">Sales Portfolio Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2236</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:ron@goldenmilechrysler.ca">ron@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2236</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:ron@goldenmilechrysler.ca">ron@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -214,8 +98,8 @@
                 <div class="gmc-name">Elias John</div>
                 <div class="gmc-title">Product Specialist</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2275</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:elias@goldenmilechrysler.ca">elias@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2275</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:elias@goldenmilechrysler.ca">elias@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -227,8 +111,8 @@
                 <div class="gmc-name">Remith</div>
                 <div class="gmc-title">Product Advisor</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2256</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:ramithew@goldenmilechrysler.ca">ramithew@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2256</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:ramithew@goldenmilechrysler.ca">ramithew@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -240,8 +124,8 @@
                 <div class="gmc-name">Tarunpreet Singh</div>
                 <div class="gmc-title">Product Advisor</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2302</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:tarunpreet@goldenmilechrysler.ca">tarunpreet@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2302</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:tarunpreet@goldenmilechrysler.ca">tarunpreet@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -253,7 +137,7 @@
                 <div class="gmc-name">Mandeep Singh</div>
                 <div class="gmc-title">Product Specialist</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:mandeep@goldenmilechrysler.ca">mandeep@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:mandeep@goldenmilechrysler.ca">mandeep@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -269,8 +153,8 @@
                 <div class="gmc-name">Harminder Hara</div>
                 <div class="gmc-title">Financial Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 3425</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:harminder@goldenmilechrysler.ca">harminder@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 3425</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:harminder@goldenmilechrysler.ca">harminder@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -282,8 +166,8 @@
                 <div class="gmc-name">Philip Roshan</div>
                 <div class="gmc-title">Director of Finance &amp; Sales Operation</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2318</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:philip@goldenmilechrysler.ca">philip@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2318</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:philip@goldenmilechrysler.ca">philip@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -308,8 +192,8 @@
                 <div class="gmc-name">Tas Osman</div>
                 <div class="gmc-title">Accounting Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2303</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:tasnim@goldenmilechrysler.ca">tasnim@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2303</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:tasnim@goldenmilechrysler.ca">tasnim@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -321,8 +205,8 @@
                 <div class="gmc-name">Delwar Hossain</div>
                 <div class="gmc-title">Office Account Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2279</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:delwar@goldenmilechrysler.ca">delwar@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2279</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:delwar@goldenmilechrysler.ca">delwar@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -347,8 +231,8 @@
                 <div class="gmc-name">Bianca Parmar</div>
                 <div class="gmc-title">Service Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2244</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:bparmar@goldenmilechrysler.ca">bparmar@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2244</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:bparmar@goldenmilechrysler.ca">bparmar@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -360,8 +244,8 @@
                 <div class="gmc-name">Antony Vincent</div>
                 <div class="gmc-title">Fleet Service Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2295</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:antony@goldenmilechrysler.ca">antony@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2295</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:antony@goldenmilechrysler.ca">antony@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -377,8 +261,8 @@
                 <div class="gmc-name">Sanshia Fernando</div>
                 <div class="gmc-title">Service Appointment Coordinator</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2245</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:sanshia@goldenmilechrysler.ca">sanshia@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2245</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:sanshia@goldenmilechrysler.ca">sanshia@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -390,8 +274,8 @@
                 <div class="gmc-name">Julia Abdool</div>
                 <div class="gmc-title">Internal Service Advisor</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2238</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:julia@goldenmilechrysler.ca">julia@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2238</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:julia@goldenmilechrysler.ca">julia@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -407,8 +291,8 @@
                 <div class="gmc-name">Paul Teppenden</div>
                 <div class="gmc-title">Parts Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2240</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:paul@goldenmilechrysler.ca">paul@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2240</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:paul@goldenmilechrysler.ca">paul@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -420,8 +304,8 @@
                 <div class="gmc-name">Bob Wills</div>
                 <div class="gmc-title">Parts Development Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2239</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:bob@goldenmilechrysler.ca">bob@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2239</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:bob@goldenmilechrysler.ca">bob@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -433,7 +317,7 @@
                 <div class="gmc-name">Nick Mallette</div>
                 <div class="gmc-title">Assistant Parts Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2242</span></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2242</span></li>
               </ul>
               </div>
             </div>
@@ -449,8 +333,8 @@
                 <div class="gmc-name">Kazem Khaleqi</div>
                 <div class="gmc-title">Parts Advisor</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2306</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:kazem@goldenmilechrysler.ca">kazem@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2306</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:kazem@goldenmilechrysler.ca">kazem@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -462,8 +346,8 @@
                 <div class="gmc-name">Sheayhon Jeevakumar</div>
                 <div class="gmc-title">Parts Advisor</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2241</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:sheayhon@goldenmilechrysler.ca">sheayhon@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2241</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:sheayhon@goldenmilechrysler.ca">sheayhon@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -475,7 +359,7 @@
                 <div class="gmc-name">Chandra Bose</div>
                 <div class="gmc-title">Parts Driver</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:midweekads1@gmail.com">midweekads1@gmail.com</a></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:midweekads1@gmail.com">midweekads1@gmail.com</a></li>
               </ul>
               </div>
             </div>
@@ -491,8 +375,8 @@
                 <div class="gmc-name">David Smith</div>
                 <div class="gmc-title">Business Development Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2278</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:david@goldenmilechrysler.ca">david@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2278</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:david@goldenmilechrysler.ca">david@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -504,8 +388,8 @@
                 <div class="gmc-name">Johan George</div>
                 <div class="gmc-title">Social Media &amp; Marketing Manager</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2316</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:johan@goldenmilechrysler.ca">johan@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2316</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:johan@goldenmilechrysler.ca">johan@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -521,8 +405,8 @@
                 <div class="gmc-name">Aiswarya Jayan</div>
                 <div class="gmc-title">Receptionist</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2221</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:aiswarya@goldenmilechrysler.ca">aiswarya@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2221</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:aiswarya@goldenmilechrysler.ca">aiswarya@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -534,8 +418,8 @@
                 <div class="gmc-name">Lumertha Kiritharan</div>
                 <div class="gmc-title">Receptionist</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg></span><span>Ext. 2221</span></li>
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:lumertha@goldenmilechrysler.ca">lumertha@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-phone"></span><span>Ext. 2221</span></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:lumertha@goldenmilechrysler.ca">lumertha@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>
@@ -551,7 +435,7 @@
                 <div class="gmc-name">Adhil Mohammed Mohammed Ismail</div>
                 <div class="gmc-title">Shuttle Driver / Lot Attendant</div>
               <ul class="gmc-contact">
-                <li><span class="gmc-ico"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></span><a href="mailto:adhil@goldenmilechrysler.ca">adhil@goldenmilechrysler.ca</a></li>
+                <li><span class="gmc-ico gmc-ico-mail"></span><a href="mailto:adhil@goldenmilechrysler.ca">adhil@goldenmilechrysler.ca</a></li>
               </ul>
               </div>
             </div>

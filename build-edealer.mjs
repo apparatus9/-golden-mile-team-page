@@ -45,8 +45,17 @@ for (const d of depts) {
 }
 
 // --- markup ----------------------------------------------------------------
-const ICON_MAIL = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>';
-const ICON_PHONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg>';
+// The icons are EMPTY spans, not inline <svg>. WordPress's sanitiser removed
+// every <svg> element from the pasted content (confirmed on the live page:
+// 0 of 60 survived), so the artwork has to arrive through CSS instead — as a
+// data: URI background, which lives inside the stylesheet and is never touched.
+const ICON_MAIL = '';
+const ICON_PHONE = '';
+
+const svgUri = (s) => 'url("data:image/svg+xml,' +
+  s.replace(/</g, '%3C').replace(/>/g, '%3E').replace(/#/g, '%23').replace(/"/g, "'") + '")';
+const ICON_MAIL_CSS = svgUri('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="#ca0000" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="#ca0000" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="#ca0000" stroke-width="1.4"/></svg>');
+const ICON_PHONE_CSS = svgUri('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="none" stroke="#ca0000" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="#ca0000"/></svg>');
 
 // All on ONE line, deliberately. wpautop converts a single newline inside a
 // paragraph into <br>, so twelve radios on twelve lines became one <p> holding
@@ -61,8 +70,8 @@ const tabs = depts.map((d, i) =>
 
 const card = (m) => {
   const rows = [
-    m.ext ? `<li><span class="gmc-ico">${ICON_PHONE}</span><span>${m.ext}</span></li>` : '',
-    m.email ? `<li><span class="gmc-ico">${ICON_MAIL}</span><a href="mailto:${m.email}">${m.email}</a></li>` : '',
+    m.ext ? `<li><span class="gmc-ico gmc-ico-phone">${ICON_PHONE}</span><span>${m.ext}</span></li>` : '',
+    m.email ? `<li><span class="gmc-ico gmc-ico-mail">${ICON_MAIL}</span><a href="mailto:${m.email}">${m.email}</a></li>` : '',
   ].filter(Boolean);
   const contact = rows.length
     ? `\n              <ul class="gmc-contact">\n                ${rows.join('\n                ')}\n              </ul>`
@@ -202,8 +211,9 @@ const css = `/* Golden Mile — staff page in the eDealer /staff/ visual style.
 .gmc-contact li{display:flex;align-items:center;gap:9px;font-size:13px;line-height:1.5;margin-top:7px}
 .gmc-contact a{color:#000;text-decoration:none;word-break:break-all}
 .gmc-contact a:hover{text-decoration:underline}
-.gmc-ico{flex:0 0 20px;width:20px;height:20px;color:var(--gmc-red)}
-.gmc-ico svg{width:100%;height:100%;display:block}
+.gmc-ico{flex:0 0 20px;width:20px;height:20px;background-repeat:no-repeat;background-position:center;background-size:20px 20px}
+.gmc-ico-phone{background-image:${ICON_PHONE_CSS}}
+.gmc-ico-mail{background-image:${ICON_MAIL_CSS}}
 
 /* active tab + visible panel */
 ${activeRules}
@@ -222,15 +232,22 @@ await writeFile('team-edealer.css', css);
 const wpCss = `@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');\n\n${css}`;
 await writeFile('team-edealer.wp.css', wpCss);
 
-// THE ONE-PASTE BUILD. Everything in a single block: <style> carrying the whole
-// stylesheet plus the webfont @import, then the markup. Nothing to place
-// separately, no Customizer step.
+// THE ONE-PASTE BUILD: <style> carrying the whole stylesheet, then the markup.
 //
-// Worth a try even though the <link> tags were stripped from this same site:
-// the <svg> icons survived that pass, and default WordPress KSES would have
-// removed those too — so the sanitiser here is permissive, and <style> has a
-// good chance of surviving where <link> did not.
-const embed = `<style>\n${wpCss}\n</style>\n` +
+// The <style> tag itself survives WordPress fine — but wpautop runs over its
+// CONTENTS and turns every newline into <br /> and every blank line into <p>.
+// Measured on the live page: 645 characters of HTML tags injected into the
+// stylesheet, and the browser's CSS parser gave up after 1 rule out of 84.
+//
+// So the stylesheet ships as a SINGLE LINE. No newlines, nothing for wpautop to
+// convert. Comments are stripped and whitespace collapsed to single spaces,
+// which is enough to keep every selector and declaration valid.
+const oneLine = (s) => s
+  .replace(/\/\*[\s\S]*?\*\//g, '')   // comments (a stray */ would end the sheet)
+  .replace(/\s+/g, ' ')               // all whitespace, newlines included -> one space
+  .trim();
+
+const embed = `<style>${oneLine(wpCss)}</style>` +
   deblank(buildHtml({ cssHref: '', rel: false, links: false }));
 await writeFile('team-edealer.embed.html', embed);
 

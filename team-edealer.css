@@ -51,8 +51,9 @@
 .gmc-contact li{display:flex;align-items:center;gap:9px;font-size:13px;line-height:1.5;margin-top:7px}
 .gmc-contact a{color:#000;text-decoration:none;word-break:break-all}
 .gmc-contact a:hover{text-decoration:underline}
-.gmc-ico{flex:0 0 20px;width:20px;height:20px;color:var(--gmc-red)}
-.gmc-ico svg{width:100%;height:100%;display:block}
+.gmc-ico{flex:0 0 20px;width:20px;height:20px;background-repeat:no-repeat;background-position:center;background-size:20px 20px}
+.gmc-ico-phone{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='none' stroke='%23ca0000' stroke-width='1.4'/%3E%3Cpath d='M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z' fill='%23ca0000'/%3E%3C/svg%3E")}
+.gmc-ico-mail{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='11' fill='none' stroke='%23ca0000' stroke-width='1.4'/%3E%3Cpath d='M6.5 9h11v6.2h-11z' fill='none' stroke='%23ca0000' stroke-width='1.4'/%3E%3Cpath d='m6.5 9.3 5.5 3.9 5.5-3.9' fill='none' stroke='%23ca0000' stroke-width='1.4'/%3E%3C/svg%3E")}
 
 /* active tab + visible panel */
 .gmc-staff:has(#gmc-d0:checked) .gmc-tab-link[for="gmc-d0"]::after{opacity:1}
