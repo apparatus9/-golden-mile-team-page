@@ -219,12 +219,25 @@ await writeFile('team-edealer.css', css);
 // Paste-into-Additional-CSS payload: same rules, plus the webfont as an @import
 // (there is no <link> to carry it once KSES has been through the post content).
 // @import must be the first rule in the sheet.
-await writeFile('team-edealer.wp.css',
-  `@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');\n\n${css}`);
+const wpCss = `@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');\n\n${css}`;
+await writeFile('team-edealer.wp.css', wpCss);
+
+// THE ONE-PASTE BUILD. Everything in a single block: <style> carrying the whole
+// stylesheet plus the webfont @import, then the markup. Nothing to place
+// separately, no Customizer step.
+//
+// Worth a try even though the <link> tags were stripped from this same site:
+// the <svg> icons survived that pass, and default WordPress KSES would have
+// removed those too — so the sanitiser here is permissive, and <style> has a
+// good chance of surviving where <link> did not.
+const embed = `<style>\n${wpCss}\n</style>\n` +
+  deblank(buildHtml({ cssHref: '', rel: false, links: false }));
+await writeFile('team-edealer.embed.html', embed);
 
 console.log(`departments: ${depts.length}   people: ${total}`);
 for (const d of depts) console.log(`  ${String(d.members.length).padStart(2)}  ${d.name}`);
-console.log('\nwrote team-edealer.html      — paste into the CMS (no <link> tags, no titlebar)');
-console.log('      team-edealer.wp.css     — paste into Appearance > Customize > Additional CSS');
+console.log('\nwrote team-edealer.embed.html — THE ONE TO PASTE: <style> + markup, single block');
+console.log('      team-edealer.html      — markup only (if the CSS is placed separately)');
+console.log('      team-edealer.wp.css    — that separate CSS, for Customize > Additional CSS');
 console.log('      team-edealer.local.html — local preview (relative URLs, keeps <link> tags)');
 console.log('      team-edealer.css        — served from the CDN');
