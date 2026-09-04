@@ -48,9 +48,12 @@ for (const d of depts) {
 const ICON_MAIL = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 9h11v6.2h-11z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="m6.5 9.3 5.5 3.9 5.5-3.9" fill="none" stroke="currentColor" stroke-width="1.4"/></svg>';
 const ICON_PHONE = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M9 7.4c.5 0 .8.2 1 .7l.7 1.6c.2.5.1.8-.3 1.1l-.6.5a7.4 7.4 0 0 0 2.9 2.9l.5-.6c.3-.4.6-.5 1.1-.3l1.6.7c.5.2.7.5.7 1 0 1.3-1 2.1-2.2 1.9A9.2 9.2 0 0 1 7.1 9.6C6.9 8.4 7.7 7.4 9 7.4Z" fill="currentColor"/></svg>';
 
-const radios = depts.map((d, i) =>
-  `  <input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d${i}"${i === 0 ? ' checked' : ''}>`
-).join('\n');
+// All on ONE line, deliberately. wpautop converts a single newline inside a
+// paragraph into <br>, so twelve radios on twelve lines became one <p> holding
+// eleven <br> tags — a 275px blank gap above the tabs. No newlines, no <br>.
+const radios = '  ' + depts.map((d, i) =>
+  `<input class="gmc-radio" type="radio" name="gmc-dept" id="gmc-d${i}"${i === 0 ? ' checked' : ''}>`
+).join('');
 
 const tabs = depts.map((d, i) =>
   `        <li class="gmc-tab"><label class="gmc-tab-link" for="gmc-d${i}">${d.name}</label></li>`
@@ -104,16 +107,20 @@ const CDN = 'https://golden-mile-team-page.pages.dev/';
 //                              editor's page is not served from our host).
 //   team-edealer.local.html  — for previewing on localhost: relative URLs, so it
 //                              renders correctly straight off disk with no network.
-const buildHtml = ({ cssHref, rel }) => `<link rel="preconnect" href="https://fonts.googleapis.com">
+// `links: false` omits the <link> tags. WordPress KSES strips them from post
+// content unless the author has unfiltered_html (single-site admins do,
+// multisite non-super-admins do not) — shipping tags that get deleted just
+// makes the paste look broken for no gain. The CSS goes in via the theme's
+// Additional CSS box instead; see team-edealer.wp.css.
+//
+// No .gmc-titlebar either: the host page already renders its own "MEET OUR
+// TEAM" band, so ours was a duplicate banner.
+const buildHtml = ({ cssHref, rel, links = true }) => `${links ? `<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="${cssHref}">
 
-<div class="gmc-staff">
-
-  <section class="gmc-titlebar">
-    <div class="gmc-container"><h1 class="gmc-h1">Meet our Team</h1></div>
-  </section>
+` : ''}<div class="gmc-staff">
 
 ${radios}
 
@@ -138,8 +145,8 @@ ${panels}
 // keeps them for readability.
 const deblank = s => s.replace(/\n[ \t]*\n+/g, '\n');
 
-await writeFile('team-edealer.html', deblank(buildHtml({ cssHref: CDN + 'team-edealer.css', rel: false })));
-await writeFile('team-edealer.local.html', buildHtml({ cssHref: 'team-edealer.css', rel: true }));
+await writeFile('team-edealer.html', deblank(buildHtml({ cssHref: CDN + 'team-edealer.css', rel: false, links: false })));
+await writeFile('team-edealer.local.html', buildHtml({ cssHref: 'team-edealer.css', rel: true, links: true }));
 
 // --- stylesheet ------------------------------------------------------------
 const css = `/* Golden Mile — staff page in the eDealer /staff/ visual style.
@@ -150,13 +157,17 @@ const css = `/* Golden Mile — staff page in the eDealer /staff/ visual style.
 .gmc-staff *,.gmc-staff *::before,.gmc-staff *::after{box-sizing:border-box}
 .gmc-container{max-width:1440px;margin:0 auto;padding:0 83px}
 
-/* hero band */
-.gmc-titlebar{background:var(--gmc-dark);padding:25px 0}
-.gmc-h1{font-family:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;font-size:50px;line-height:60px;
-  font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#fff;margin:0}
-
 /* department tabs — pure CSS, no JavaScript (CMS editors strip <script>) */
 .gmc-radio{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+/* WordPress's wpautop wraps each loose radio in its own <p>. The radio is taken
+   out of flow, but the <p> still generates a line box with default margins —
+   twelve of them stacked up as a large blank gap above the tabs. display:contents
+   removes the wrapper's box while leaving the input where it is. */
+.gmc-staff p:has(> .gmc-radio){display:contents}
+.gmc-staff > p:empty{display:none}
+/* and any <br> wpautop inserted between them — belt and braces, since the markup
+   now keeps the radios on one line so there should be none to begin with */
+.gmc-staff p:has(> .gmc-radio) br,.gmc-staff > br{display:none}
 .gmc-tabs{display:flex;flex-wrap:wrap;row-gap:14px;list-style:none;margin:0 0 28px;padding:28px 0 0;
   border-bottom:1px solid #ddd}
 .gmc-tab{padding:0 25px 0 0}
@@ -199,15 +210,21 @@ ${activeRules}
 
 @media (max-width:900px){
   .gmc-container{padding:0 24px}
-  .gmc-h1{font-size:34px;line-height:42px}
   .gmc-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
   .gmc-tabs::-webkit-scrollbar{display:none}
 }
 `;
 await writeFile('team-edealer.css', css);
 
+// Paste-into-Additional-CSS payload: same rules, plus the webfont as an @import
+// (there is no <link> to carry it once KSES has been through the post content).
+// @import must be the first rule in the sheet.
+await writeFile('team-edealer.wp.css',
+  `@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&display=swap');\n\n${css}`);
+
 console.log(`departments: ${depts.length}   people: ${total}`);
 for (const d of depts) console.log(`  ${String(d.members.length).padStart(2)}  ${d.name}`);
-console.log('\nwrote team-edealer.html (CMS embed, absolute URLs)');
-console.log('      team-edealer.local.html (preview, relative URLs)');
-console.log('      team-edealer.css');
+console.log('\nwrote team-edealer.html      — paste into the CMS (no <link> tags, no titlebar)');
+console.log('      team-edealer.wp.css     — paste into Appearance > Customize > Additional CSS');
+console.log('      team-edealer.local.html — local preview (relative URLs, keeps <link> tags)');
+console.log('      team-edealer.css        — served from the CDN');
