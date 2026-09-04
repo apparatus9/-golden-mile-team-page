@@ -1,0 +1,108 @@
+/* Golden Mile — staff page in the eDealer /staff/ visual style.
+   Values measured from the live eDealer page's computed styles. */
+
+.gmc-staff{--gmc-red:#ca0000;--gmc-dark:#222;--gmc-card:#ebebeb;--gmc-gut:37.5px;
+  font-family:Arial,Helvetica,sans-serif;color:#000;-webkit-font-smoothing:antialiased}
+.gmc-staff *,.gmc-staff *::before,.gmc-staff *::after{box-sizing:border-box}
+.gmc-container{max-width:1440px;margin:0 auto;padding:0 83px}
+
+/* hero band */
+.gmc-titlebar{background:var(--gmc-dark);padding:25px 0}
+.gmc-h1{font-family:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;font-size:50px;line-height:60px;
+  font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:#fff;margin:0}
+
+/* department tabs — pure CSS, no JavaScript (CMS editors strip <script>) */
+.gmc-radio{position:absolute;opacity:0;pointer-events:none;width:0;height:0}
+.gmc-tabs{display:flex;flex-wrap:wrap;row-gap:14px;list-style:none;margin:0 0 28px;padding:28px 0 0;
+  border-bottom:1px solid #ddd}
+.gmc-tab{padding:0 25px 0 0}
+.gmc-tab-link{position:relative;display:inline-flex;padding-bottom:12px;font-size:17px;line-height:1.3;
+  color:#000;cursor:pointer;text-transform:uppercase;white-space:nowrap}
+.gmc-tab-link::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;
+  background:var(--gmc-red);opacity:0;transition:opacity .15s ease}
+.gmc-tab-link:hover::after{opacity:.45}
+.gmc-radio:focus-visible + .gmc-wrap .gmc-tab-link{outline:2px solid var(--gmc-red);outline-offset:3px}
+
+/* panels */
+.gmc-panel{display:none}
+
+/* grid — 1 / 2 / 3 up, matching eDealer's medium-6 xlarge-4 */
+.gmc-grid{display:flex;flex-wrap:wrap;margin:0 calc(var(--gmc-gut) / -2)}
+.gmc-cell{width:100%;padding:0 calc(var(--gmc-gut) / 2);margin-bottom:var(--gmc-gut)}
+@media (min-width:640px){.gmc-cell{width:50%}}
+@media (min-width:1200px){.gmc-cell{width:33.3333%}}
+
+/* card */
+.gmc-box{background:var(--gmc-card);padding:25px;height:100%}
+.gmc-img{line-height:0}
+.gmc-img img{width:100%;height:auto;display:block}
+.gmc-details{padding-top:18px}
+.gmc-name{font-family:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;font-size:25px;line-height:30px;
+  font-weight:400;letter-spacing:.2px;color:#000}
+.gmc-title{font-family:Oswald,"Arial Narrow",Helvetica,Arial,sans-serif;font-size:20px;line-height:25px;
+  font-weight:600;letter-spacing:.4px;color:#000;margin-top:2px}
+
+/* contact list */
+.gmc-contact{list-style:none;margin:14px 0 0;padding:0}
+.gmc-contact li{display:flex;align-items:center;gap:9px;font-size:13px;line-height:1.5;margin-top:7px}
+.gmc-contact a{color:#000;text-decoration:none;word-break:break-all}
+.gmc-contact a:hover{text-decoration:underline}
+.gmc-ico{flex:0 0 20px;width:20px;height:20px;color:var(--gmc-red)}
+.gmc-ico svg{width:100%;height:100%;display:block}
+
+/* active tab + visible panel */
+.gmc-staff:has(#gmc-d0:checked) .gmc-tab-link[for="gmc-d0"]::after{opacity:1}
+.gmc-staff:has(#gmc-d0:checked) .gmc-panel-0{display:block}
+#gmc-d0:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d0"]::after{opacity:1}
+#gmc-d0:checked ~ .gmc-wrap .gmc-panel-0{display:block}
+.gmc-staff:has(#gmc-d1:checked) .gmc-tab-link[for="gmc-d1"]::after{opacity:1}
+.gmc-staff:has(#gmc-d1:checked) .gmc-panel-1{display:block}
+#gmc-d1:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d1"]::after{opacity:1}
+#gmc-d1:checked ~ .gmc-wrap .gmc-panel-1{display:block}
+.gmc-staff:has(#gmc-d2:checked) .gmc-tab-link[for="gmc-d2"]::after{opacity:1}
+.gmc-staff:has(#gmc-d2:checked) .gmc-panel-2{display:block}
+#gmc-d2:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d2"]::after{opacity:1}
+#gmc-d2:checked ~ .gmc-wrap .gmc-panel-2{display:block}
+.gmc-staff:has(#gmc-d3:checked) .gmc-tab-link[for="gmc-d3"]::after{opacity:1}
+.gmc-staff:has(#gmc-d3:checked) .gmc-panel-3{display:block}
+#gmc-d3:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d3"]::after{opacity:1}
+#gmc-d3:checked ~ .gmc-wrap .gmc-panel-3{display:block}
+.gmc-staff:has(#gmc-d4:checked) .gmc-tab-link[for="gmc-d4"]::after{opacity:1}
+.gmc-staff:has(#gmc-d4:checked) .gmc-panel-4{display:block}
+#gmc-d4:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d4"]::after{opacity:1}
+#gmc-d4:checked ~ .gmc-wrap .gmc-panel-4{display:block}
+.gmc-staff:has(#gmc-d5:checked) .gmc-tab-link[for="gmc-d5"]::after{opacity:1}
+.gmc-staff:has(#gmc-d5:checked) .gmc-panel-5{display:block}
+#gmc-d5:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d5"]::after{opacity:1}
+#gmc-d5:checked ~ .gmc-wrap .gmc-panel-5{display:block}
+.gmc-staff:has(#gmc-d6:checked) .gmc-tab-link[for="gmc-d6"]::after{opacity:1}
+.gmc-staff:has(#gmc-d6:checked) .gmc-panel-6{display:block}
+#gmc-d6:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d6"]::after{opacity:1}
+#gmc-d6:checked ~ .gmc-wrap .gmc-panel-6{display:block}
+.gmc-staff:has(#gmc-d7:checked) .gmc-tab-link[for="gmc-d7"]::after{opacity:1}
+.gmc-staff:has(#gmc-d7:checked) .gmc-panel-7{display:block}
+#gmc-d7:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d7"]::after{opacity:1}
+#gmc-d7:checked ~ .gmc-wrap .gmc-panel-7{display:block}
+.gmc-staff:has(#gmc-d8:checked) .gmc-tab-link[for="gmc-d8"]::after{opacity:1}
+.gmc-staff:has(#gmc-d8:checked) .gmc-panel-8{display:block}
+#gmc-d8:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d8"]::after{opacity:1}
+#gmc-d8:checked ~ .gmc-wrap .gmc-panel-8{display:block}
+.gmc-staff:has(#gmc-d9:checked) .gmc-tab-link[for="gmc-d9"]::after{opacity:1}
+.gmc-staff:has(#gmc-d9:checked) .gmc-panel-9{display:block}
+#gmc-d9:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d9"]::after{opacity:1}
+#gmc-d9:checked ~ .gmc-wrap .gmc-panel-9{display:block}
+.gmc-staff:has(#gmc-d10:checked) .gmc-tab-link[for="gmc-d10"]::after{opacity:1}
+.gmc-staff:has(#gmc-d10:checked) .gmc-panel-10{display:block}
+#gmc-d10:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d10"]::after{opacity:1}
+#gmc-d10:checked ~ .gmc-wrap .gmc-panel-10{display:block}
+.gmc-staff:has(#gmc-d11:checked) .gmc-tab-link[for="gmc-d11"]::after{opacity:1}
+.gmc-staff:has(#gmc-d11:checked) .gmc-panel-11{display:block}
+#gmc-d11:checked ~ .gmc-wrap .gmc-tab-link[for="gmc-d11"]::after{opacity:1}
+#gmc-d11:checked ~ .gmc-wrap .gmc-panel-11{display:block}
+
+@media (max-width:900px){
+  .gmc-container{padding:0 24px}
+  .gmc-h1{font-size:34px;line-height:42px}
+  .gmc-tabs{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .gmc-tabs::-webkit-scrollbar{display:none}
+}
